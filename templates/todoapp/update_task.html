@@ -1,0 +1,29 @@
+{% extends 'base.html' %} 
+{% block title %} todoapp {% endblock %}
+ {% block content %}
+<div class="m-12 grid grid-cols-1 bg-red-200 container mx-auto">
+  <div class="font-bold text-3xl p-6 text-indigo-600 text-center">ToDoApp</div>
+
+  <div>
+    <form
+      action=""
+      method="post"
+      class="flex mb-8 p-4 items-center relative"
+    >
+      {% csrf_token %}
+      <input
+        type="text"
+        class="form-input m-2"
+        name="title"
+		value="{{ object }}"
+		/>
+      <button
+        class="btn btn-primary h-14 rounded-none rounded-r-lg absolute right-6 "
+      >
+        change
+      </button>
+    </form>
+  </div>
+ 
+</div>
+{% endblock %}

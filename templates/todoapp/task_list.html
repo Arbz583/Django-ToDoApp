@@ -1,0 +1,61 @@
+{% extends 'base.html' %} 
+{% block title %} todoapp {% endblock %}
+ {% block content %}
+
+<div class="m-12 grid grid-cols-1 bg-red-200 container mx-auto">
+   <div>
+              <button class="btn btn-primary" disabled>signing as a {{request.user.username}}</button>
+             <a href="{% url 'accounts:logout' %}">
+              <button class="btn btn-primary mr-2">logout</button></a>
+            </div>
+  <div class="font-bold text-3xl p-6 text-indigo-600 text-center">ToDoApp</div>
+
+  <div>
+    <form
+      action="{% url 'create_task' %}"
+      method="post"
+      class="flex mb-8 p-4 items-center relative"
+    >
+      {% csrf_token %}
+      <input
+        type="text"
+        class="form-input m-2"
+        name="title"
+        placeholder="type here"
+        required
+      />
+      <button
+        class="btn btn-primary h-14 rounded-none rounded-r-lg absolute right-6"
+      >
+        submit
+      </button>
+    </form>
+  </div>
+  {% if tasks %} 
+  {% for task in tasks %}
+
+  <div
+    class="shadow-lg sm:p-5 m-5 bg-indigo-300 rounded-lg flex items-center relative justify-between"
+  >
+    <div
+      class="{% if task.complete == True %} line-through decoration-red-500 decoration-2 {% endif %} text-gray-700 p-2"
+    >
+      {{task.title}}
+    </div>
+    <div class="sm:absolute flex right-0 h-full">
+      <a href="{% url 'complete_task' task.id %}"class="btn btn-primary rounded-none bg-green-600 justify-center py-6 " >
+          Done
+        </a>
+      <a href="{% url 'delete_task' task.id %}"class="btn btn-primary rounded-none bg-red-500 p-2 py-6">
+          Delete
+        </a>
+      
+      <a href="{% url 'update_task' task.id %}" class="btn btn-primary rounded-none rounded-r-lg bg-yellow-500 py-6">
+          Edit
+    </a
+      >
+    </div>
+  </div>
+  {% endfor %} {% endif %}
+</div>
+{% endblock %}

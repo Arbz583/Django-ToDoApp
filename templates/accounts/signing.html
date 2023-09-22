@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} signing {% endblock %}
+{% block content %}
+    <div class="container grid place-content-center w-screen h-screen bg-blue-200">
+      <div class="font-bold text-3xl p-6 text-indigo-600 text-center">
+        Signing
+      </div>
+      <form action="{% url 'accounts:login' %}" method="post" class="grid">
+        {% csrf_token %}
+        <input type="text" placeholder="username" name="username" class="form-input" />
+        <input type="password" name="password" placeholder="password" class="form-input" />
+        <label class="text-center mt-4 text-indigo-600">
+          <input type="checkbox" value="remember_me" name="remember_me"/> Remember me
+        </label>
+        <button class="btn btn-primary my-5">Signing</button>
+      </form>
+      <div class="text-gray-900">
+        if you have do not have a accounts, please
+        <a href="{% url 'accounts:register' %}" class="text-indigo-600 contents">register</a> at first.
+      </div>
+          {% if form.errors %}
+    <div class="bg-red-200 mt-4 ">
+        <h6 class="font-bold">Please fix the following errors and try again.</h6>
+        <ul>
+            {% for field in form %}
+            {% if field.errors %}
+            {% for error in field.errors %}
+            <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+        </ul>
+        {% if form.non_field_errors %}
+        {{ form.non_field_errors }}
+        {% endif %}
+    </div>
+    {% endif %}
+    </div>
+
+{% endblock %}

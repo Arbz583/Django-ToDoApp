@@ -1,0 +1,37 @@
+
+    {% extends 'base.html' %}
+
+{% block title %} register {% endblock %}
+{% block content %}
+    <div class="container grid place-content-center w-screen h-screen bg-blue-200">
+      <div class="font-bold text-3xl p-6 text-indigo-600 text-center">Register</div> 
+      <form action="{% url 'accounts:register' %}" method="post"  class="grid ">
+        {% csrf_token %}
+        <input type="text" placeholder="username"  name="username" class="form-input "/>
+        <input type="password" name="password1"  placeholder="password" class="form-input"/>
+        <input type="password" name="password2"  placeholder="repeat password" class="form-input"/>
+        <button class="btn btn-primary my-5 ">Register</button>
+      </form>
+      <div class="text-gray-900">
+             if you have registered before, please <a href="{% url 'accounts:login' %}" class="text-indigo-600 contents">signing</a> and go ahead.
+      </div>
+     {% if form.errors %}
+    <div class="bg-red-200 mt-4 ">
+        <h6 class="font-bold">Please fix the following errors and try again.</h6>
+        <ul>
+            {% for field in form %}
+            {% if field.errors %}
+            {% for error in field.errors %}
+            <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+        </ul>
+        {% if form.non_field_errors %}
+        {{ form.non_field_errors }}
+        {% endif %}
+    </div>
+    {% endif %}
+    </div>
+  
+{% endblock %}
