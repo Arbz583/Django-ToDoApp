@@ -8,7 +8,6 @@ from django.shortcuts import redirect
 
 class CustomLoginView(LoginView):
     template_name = "accounts/signing.html"
-    fields = ["username","password", ]
     redirect_authenticated_user = True
 
     def get_success_url(self):
@@ -25,9 +24,9 @@ class RegisterPageView(FormView):
         user = form.save()
         if user is not None:
             login(self.request, user)
-        return super(RegisterPageView, self).form_valid(form)
+        return super().form_valid(form)
 
     def get(self, *args, **kwargs):
         if self.request.user.is_authenticated:
             return redirect("task_list")
-        return super(RegisterPageView, self).get(*args, **kwargs)
+        return super().get(*args, **kwargs)

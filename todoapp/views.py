@@ -28,12 +28,12 @@ class TaskList(LoginRequiredMixin, ListView):
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
-    fields = ["title"]
+    form_class = TaskUpdateForm
     success_url = reverse_lazy("task_list")
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(TaskCreate, self).form_valid(form)
+        return super().form_valid(form)
 
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
@@ -41,31 +41,28 @@ class TaskUpdate(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("task_list")
     form_class = TaskUpdateForm
     template_name = "todoapp/update_task.html"
+    context_object_name = "task"
+
 
     def post(self, request, *args, **kwargs):
         object = Task.objects.get(id=kwargs.get("pk"))
         object.complete = False
-        object.save()
-        return redirect(self.success_url)
-    
+        object.save()   
+        return super().post(request, *args, **kwargs )
+  
 class TaskComplete(LoginRequiredMixin, View):
-    model = Task
-    success_url = reverse_lazy("task_list")
+    # model = Task
+    successurl = reverse_lazy("task_list")
 
     def get(self, request, *args, **kwargs):
         object = Task.objects.get(id=kwargs.get("pk"))
         object.complete = True
         object.save()
-        return redirect(self.success_url)
+        return redirect(self.successurl)
 
 
 class DeleteView(LoginRequiredMixin, DeleteView):
     model = Task
-    context_object_name = "task"
     success_url = reverse_lazy("task_list")
 
-    def get(self, request, *args, **kwargs):
-        return self.post(request, *args, **kwargs)
 
-    def get_queryset(self):
-        return self.model.objects.filter(user=self.request.user)

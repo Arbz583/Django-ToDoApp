@@ -2,7 +2,7 @@
 
 {% block title %} signing {% endblock %}
 {% block content %}
-    <div class="container grid place-content-center w-screen h-screen bg-blue-200">
+    <div class="container grid place-content-center w-screen h-screen bg-blue-200 mx-auto">
       <div class="font-bold text-3xl p-6 text-indigo-600 text-center">
         Signing
       </div>
@@ -10,9 +10,6 @@
         {% csrf_token %}
         <input type="text" placeholder="username" name="username" class="form-input" />
         <input type="password" name="password" placeholder="password" class="form-input" />
-        <label class="text-center mt-4 text-indigo-600">
-          <input type="checkbox" value="remember_me" name="remember_me"/> Remember me
-        </label>
         <button class="btn btn-primary my-5">Signing</button>
       </form>
       <div class="text-gray-900">
