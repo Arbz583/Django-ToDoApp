@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'todoapp',
-]
+    "rest_framework",
+    "django_filters",
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
