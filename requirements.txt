@@ -7,3 +7,4 @@ djangorestframework==3.14.0
 #third party modules
 django-filter==23.2
 Markdown==3.4.4
+drf-yasg[validation]
