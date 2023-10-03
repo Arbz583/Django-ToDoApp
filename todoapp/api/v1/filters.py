@@ -11,5 +11,3 @@ class TaskFilter(filters.FilterSet):
             "title": ["exact", "in"],
             "complete": ["exact"],
         }
-
-

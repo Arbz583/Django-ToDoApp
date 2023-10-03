@@ -12,7 +12,7 @@ class CustomLoginView(LoginView):
 
     def get_success_url(self):
         return reverse_lazy("task_list")
-    
+
 
 class RegisterPageView(FormView):
     template_name = "accounts/register.html"

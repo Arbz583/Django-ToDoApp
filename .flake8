@@ -1,0 +1,18 @@
+[flake8]
+exclude =
+    .github,
+    .gitignore,
+    __pycache__,
+    __init__.py,
+    .pytest_cache,
+    venv,
+    .env,
+    settings.py,
+    .txt,
+    .dockerignore,
+    test.py,
+    test_.py,
+    
+ignore=       
+    E501,
+    

@@ -4,7 +4,6 @@ from django.views.generic.edit import (
     CreateView,
     UpdateView,
     DeleteView,
-
 )
 from django.urls import reverse_lazy
 
@@ -43,13 +42,13 @@ class TaskUpdate(LoginRequiredMixin, UpdateView):
     template_name = "todoapp/update_task.html"
     context_object_name = "task"
 
-
     def post(self, request, *args, **kwargs):
         object = Task.objects.get(id=kwargs.get("pk"))
         object.complete = False
-        object.save()   
-        return super().post(request, *args, **kwargs )
-  
+        object.save()
+        return super().post(request, *args, **kwargs)
+
+
 class TaskComplete(LoginRequiredMixin, View):
     # model = Task
     successurl = reverse_lazy("task_list")
@@ -64,5 +63,3 @@ class TaskComplete(LoginRequiredMixin, View):
 class DeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     success_url = reverse_lazy("task_list")
-
-

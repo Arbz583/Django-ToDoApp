@@ -15,7 +15,5 @@ class TaskModelViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
     pagination_class = DefaultPagination
     filterset_class = TaskFilter
-    search_fields = ["title"] 
+    search_fields = ["title"]
     ordering_fields = ["created_date"]
-
-

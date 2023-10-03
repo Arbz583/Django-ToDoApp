@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
-from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 
 
@@ -20,4 +19,3 @@ class RegistrationSerializer(serializers.ModelSerializer):
         except exceptions.ValidationError as e:
             raise serializers.ValidationError({"password": list(e.messages)})
         return super().validate(attrs)
-

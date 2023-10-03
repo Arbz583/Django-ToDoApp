@@ -1,7 +1,5 @@
 from rest_framework import serializers
 from ...models import Task
-from django.contrib.auth.models import User
-
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -9,7 +7,9 @@ class TaskSerializer(serializers.ModelSerializer):
     snippet = serializers.ReadOnlyField(source="get_snippet")
     relative_url = serializers.URLField(source="get_absolute_api_url", read_only=True)
     absolute_url_api = serializers.SerializerMethodField(method_name="get_abs_url")
-    user=serializers.SlugRelatedField(many=False, slug_field="username", read_only=True)
+    user = serializers.SlugRelatedField(
+        many=False, slug_field="username", read_only=True
+    )
 
     class Meta:
         model = Task
@@ -26,7 +26,6 @@ class TaskSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = [
             "user",
-
         ]
 
     def get_abs_url(self, obj):
@@ -45,6 +44,5 @@ class TaskSerializer(serializers.ModelSerializer):
         return rep
 
     def create(self, validated_data):
-
         validated_data["user"] = self.context.get("request").user
         return super().create(validated_data)
