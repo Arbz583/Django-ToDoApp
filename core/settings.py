@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "drf_spectacular_sidecar",
     "rest_framework.authtoken",
     "rest_framework_simplejwt",
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
@@ -152,3 +153,6 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
 }
+
+# celery configs
+CELERY_BROKER_URL = "redis://redis:6379/1"
