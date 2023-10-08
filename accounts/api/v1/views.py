@@ -7,7 +7,6 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-
 class RegistrationApiView(generics.GenericAPIView):
     serializer_class = RegistrationSerializer
 
