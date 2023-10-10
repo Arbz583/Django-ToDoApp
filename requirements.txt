@@ -19,3 +19,6 @@ pytest-django
 #Refactoring & Test
 black
 flake8
+
+# deployment modules
+gunicorn
